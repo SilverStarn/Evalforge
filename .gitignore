@@ -10,4 +10,3 @@ storybook-static
 .env.local
 .vscode/*.local.json
 .codex/config.toml
-AGENTS.md
