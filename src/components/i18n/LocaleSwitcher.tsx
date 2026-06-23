@@ -7,7 +7,11 @@ const locales = [
   { code: 'ar', label: 'العربية', dir: 'rtl' },
 ] as const;
 
-export function LocaleSwitcher() {
+interface LocaleSwitcherProps {
+  compactLabel?: boolean;
+}
+
+export function LocaleSwitcher({ compactLabel = false }: LocaleSwitcherProps) {
   const { i18n, t } = useTranslation();
 
   useEffect(() => {
@@ -18,9 +22,11 @@ export function LocaleSwitcher() {
 
   return (
     <label className="flex items-center gap-2 text-sm font-medium text-slate-700">
-      <span>{t('settings.language')}</span>
+      <span className={compactLabel ? 'sr-only sm:not-sr-only' : undefined}>
+        {t('settings.language')}
+      </span>
       <select
-        className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm"
+        className="rounded-md border border-slate-300 bg-white px-3 py-2 text-sm shadow-[inset_0_1px_1px_rgb(15_23_42_/_0.04)]"
         value={i18n.language}
         onChange={(event) => {
           void i18n.changeLanguage(event.target.value);

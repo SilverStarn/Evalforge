@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { Card } from '@/components/ui/Card';
 import { LocaleSwitcher } from '@/components/i18n/LocaleSwitcher';
+import { PageHeader } from '@/components/ui/PageHeader';
 import { setKeyboardMode } from '@/store/uiSlice';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 
@@ -12,14 +13,11 @@ export function SettingsPage() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold text-slate-950">{t('settings.title')}</h1>
-        <p className="mt-2 text-slate-600">{t('settings.description')}</p>
-      </div>
+      <PageHeader title={t('settings.title')} description={t('settings.description')} />
 
       <Card className="space-y-5">
         <LocaleSwitcher />
-        <div className="flex items-start gap-3 text-sm font-medium text-slate-900">
+        <div className="flex items-start gap-3 rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm font-medium text-slate-900">
           <input
             id={keyboardModeId}
             type="checkbox"

@@ -35,7 +35,7 @@ export function RatingScale({
             key={score}
             type="button"
             className={clsx(
-              'h-10 min-w-10 rounded-lg border text-sm font-semibold transition',
+              'h-10 min-w-10 rounded-md border text-sm font-semibold shadow-[0_1px_1px_rgb(15_23_42_/_0.04)] transition-[background-color,border-color,color,transform] motion-safe:hover:-translate-y-px motion-safe:active:translate-y-0',
               value === score
                 ? 'border-blue-700 bg-blue-700 text-white'
                 : 'border-slate-300 bg-white text-slate-800 hover:bg-slate-50',

@@ -3,6 +3,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
+import { PageHeader } from '@/components/ui/PageHeader';
 import { mockApi } from '@/lib/api/mockApi';
 import { validateReviewDraft } from '@/lib/rubrics/validation';
 import { setActiveDraftTaskId } from '@/store/uiSlice';
@@ -148,22 +149,22 @@ export function ReviewWorkspace({ task, rubric }: ReviewWorkspaceProps) {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
-        <div>
-          <p className="text-sm font-semibold uppercase text-blue-700">{task.id}</p>
-          <h1 className="text-3xl font-bold text-slate-950">{t('review.title')}</h1>
-          <p className="mt-2 text-slate-600">{task.projectName}</p>
-        </div>
-        <p className="rounded-lg bg-slate-100 px-3 py-2 text-sm text-slate-700">
-          {t('review.keyboardHint')}
-        </p>
-      </div>
+      <PageHeader
+        eyebrow={task.id}
+        title={t('review.title')}
+        description={task.projectName}
+        actions={
+          <p className="rounded-md border border-slate-200 bg-white px-3 py-2 text-sm text-slate-600 shadow-[0_1px_1px_rgb(15_23_42_/_0.04)]">
+            {t('review.keyboardHint')}
+          </p>
+        }
+      />
 
       <div aria-live="polite" className="sr-only">
         {liveMessage}
       </div>
 
-      <Card>
+      <Card className="border-l-4 border-l-blue-500">
         <h2 className="text-lg font-semibold text-slate-950">{t('review.prompt')}</h2>
         <p className="mt-3 leading-7 text-slate-700">{task.prompt}</p>
       </Card>
@@ -249,7 +250,7 @@ export function ReviewWorkspace({ task, rubric }: ReviewWorkspaceProps) {
           <label className="space-y-2 text-sm font-medium text-slate-700">
             <span>{t('review.annotationResponse')}</span>
             <select
-              className="w-full rounded-lg border border-slate-300 px-3 py-2"
+              className="w-full rounded-md border border-slate-300 px-3 py-2 shadow-[inset_0_1px_1px_rgb(15_23_42_/_0.04)]"
               value={annotationSide}
               onChange={(event) => setAnnotationSide(event.target.value as ResponseSide)}
             >
@@ -260,7 +261,7 @@ export function ReviewWorkspace({ task, rubric }: ReviewWorkspaceProps) {
           <label className="space-y-2 text-sm font-medium text-slate-700">
             <span>{t('review.selectedQuote')}</span>
             <input
-              className="w-full rounded-lg border border-slate-300 px-3 py-2"
+              className="w-full rounded-md border border-slate-300 px-3 py-2 shadow-[inset_0_1px_1px_rgb(15_23_42_/_0.04)]"
               value={annotationQuote}
               onChange={(event) => setAnnotationQuote(event.target.value)}
             />
@@ -268,7 +269,7 @@ export function ReviewWorkspace({ task, rubric }: ReviewWorkspaceProps) {
           <label className="space-y-2 text-sm font-medium text-slate-700">
             <span>{t('review.note')}</span>
             <input
-              className="w-full rounded-lg border border-slate-300 px-3 py-2"
+              className="w-full rounded-md border border-slate-300 px-3 py-2 shadow-[inset_0_1px_1px_rgb(15_23_42_/_0.04)]"
               value={annotationNote}
               onChange={(event) => setAnnotationNote(event.target.value)}
             />
@@ -276,7 +277,7 @@ export function ReviewWorkspace({ task, rubric }: ReviewWorkspaceProps) {
           <label className="space-y-2 text-sm font-medium text-slate-700">
             <span>{t('review.severity')}</span>
             <select
-              className="w-full rounded-lg border border-slate-300 px-3 py-2"
+              className="w-full rounded-md border border-slate-300 px-3 py-2 shadow-[inset_0_1px_1px_rgb(15_23_42_/_0.04)]"
               value={annotationSeverity}
               onChange={(event) => setAnnotationSeverity(event.target.value as AnnotationSeverity)}
             >

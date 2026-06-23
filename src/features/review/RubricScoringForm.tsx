@@ -12,7 +12,7 @@ interface RubricScoringFormProps {
 }
 
 const inputClasses =
-  'w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-900 shadow-sm focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600/20';
+  'w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-900 shadow-[inset_0_1px_1px_rgb(15_23_42_/_0.04)] focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600/20';
 
 export function RubricScoringForm({
   rubric,
@@ -45,7 +45,7 @@ export function RubricScoringForm({
         if (criterion.type === 'boolean') {
           const fieldId = `criterion-${criterion.id}`;
           return (
-            <div key={criterion.id} className="rounded-lg border border-slate-200 p-4">
+            <div key={criterion.id} className="rounded-lg border border-slate-200 bg-slate-50 p-4">
               <div className="flex items-start gap-3">
                 <input
                   id={fieldId}
@@ -112,7 +112,7 @@ export function RubricScoringForm({
           return (
             <fieldset
               key={criterion.id}
-              className="space-y-3 rounded-lg border border-slate-200 p-4"
+              className="space-y-3 rounded-lg border border-slate-200 bg-slate-50 p-4"
               aria-describedby={error ? errorId : undefined}
             >
               <legend className="text-sm font-semibold text-slate-900">

@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
+import { PageHeader } from '@/components/ui/PageHeader';
 import { mockApi } from '@/lib/api/mockApi';
 import { rubricSchema } from '@/lib/rubrics/rubricSchema';
 
@@ -11,10 +12,7 @@ export function RubricsPage() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold text-slate-950">{t('rubrics.title')}</h1>
-        <p className="mt-2 text-slate-600">{t('rubrics.description')}</p>
-      </div>
+      <PageHeader title={t('rubrics.title')} description={t('rubrics.description')} />
 
       {rubricsQuery.isLoading ? <Card>{t('rubrics.loading')}</Card> : null}
       {rubricsQuery.isError ? (
@@ -31,13 +29,13 @@ export function RubricsPage() {
         {rubricsQuery.data?.map((rubric) => {
           const validation = rubricSchema.safeParse(rubric);
           return (
-            <Card key={rubric.id} className="space-y-4">
+            <Card key={rubric.id} className="space-y-4 border-t-4 border-t-blue-500">
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <h2 className="text-xl font-semibold text-slate-950">{rubric.name}</h2>
                   <p className="mt-1 text-sm text-slate-600">{rubric.description}</p>
                 </div>
-                <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700">
+                <span className="whitespace-nowrap rounded-md border border-slate-200 bg-slate-50 px-2 py-1 text-xs font-medium text-slate-700">
                   {t('rubrics.version')} {rubric.version}
                 </span>
               </div>
@@ -48,7 +46,10 @@ export function RubricsPage() {
                 </h3>
                 <ul className="mt-3 space-y-3">
                   {rubric.criteria.map((criterion) => (
-                    <li key={criterion.id} className="rounded-lg border border-slate-200 p-3">
+                    <li
+                      key={criterion.id}
+                      className="rounded-lg border border-slate-200 bg-slate-50 p-3"
+                    >
                       <p className="font-semibold text-slate-950">{criterion.label}</p>
                       <p className="text-sm text-slate-600">{criterion.description}</p>
                       <dl className="mt-3 grid gap-2 text-xs text-slate-600 sm:grid-cols-2">

@@ -3,6 +3,8 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
+import { PageHeader } from '@/components/ui/PageHeader';
+import { StatusBadge } from '@/components/ui/StatusBadge';
 import { mockApi } from '@/lib/api/mockApi';
 import type { LeadDecision, ReviewDecision } from '@/types/domain';
 
@@ -65,10 +67,7 @@ export function LeadReviewPage() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold text-slate-950">{t('leadReview.title')}</h1>
-        <p className="mt-2 text-slate-600">{t('leadReview.description')}</p>
-      </div>
+      <PageHeader title={t('leadReview.title')} description={t('leadReview.description')} />
 
       {tasksQuery.isLoading || submissionsQuery.isLoading ? (
         <Card>{t('leadReview.loading')}</Card>
@@ -93,12 +92,12 @@ export function LeadReviewPage() {
 
       {activeTask ? (
         <div className="grid gap-4 xl:grid-cols-[1fr_360px]">
-          <Card className="space-y-5">
+          <Card className="space-y-5 border-l-4 border-l-violet-500">
             {tasksQuery.data && tasksQuery.data.length > 1 ? (
               <label className="block max-w-md space-y-2 text-sm font-medium text-slate-700">
                 <span>{t('leadReview.taskSelector')}</span>
                 <select
-                  className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2"
+                  className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm shadow-[inset_0_1px_1px_rgb(15_23_42_/_0.04)]"
                   value={activeTask.id}
                   onChange={(event) => setSelectedTaskId(event.target.value)}
                 >
@@ -112,19 +111,22 @@ export function LeadReviewPage() {
             ) : null}
 
             <div>
-              <p className="text-sm font-semibold uppercase text-blue-700">{activeTask.id}</p>
-              <h2 className="text-2xl font-semibold text-slate-950">
+              <div className="flex flex-wrap items-center gap-2">
+                <p className="text-sm font-semibold uppercase text-blue-700">{activeTask.id}</p>
+                <StatusBadge status={activeTask.status} />
+              </div>
+              <h2 className="mt-2 text-2xl font-semibold text-slate-950">
                 {t('leadReview.disagreement')}
               </h2>
               <p className="mt-2 text-slate-600">{activeTask.prompt}</p>
             </div>
 
             <div className="grid gap-4 lg:grid-cols-2">
-              <section className="rounded-lg border border-slate-200 p-4">
+              <section className="rounded-lg border border-slate-200 bg-slate-50 p-4">
                 <h3 className="font-semibold text-slate-950">{t('review.responseA')}</h3>
                 <p className="mt-2 text-sm leading-6 text-slate-700">{activeTask.responseA}</p>
               </section>
-              <section className="rounded-lg border border-slate-200 p-4">
+              <section className="rounded-lg border border-slate-200 bg-slate-50 p-4">
                 <h3 className="font-semibold text-slate-950">{t('review.responseB')}</h3>
                 <p className="mt-2 text-sm leading-6 text-slate-700">{activeTask.responseB}</p>
               </section>
@@ -139,7 +141,10 @@ export function LeadReviewPage() {
               </p>
               <div className="mt-3 space-y-3">
                 {activeSubmissions.map((submission) => (
-                  <article key={submission.id} className="rounded-lg border border-slate-200 p-4">
+                  <article
+                    key={submission.id}
+                    className="rounded-lg border border-slate-200 p-4 transition-colors hover:bg-slate-50"
+                  >
                     <p className="font-semibold text-slate-950">
                       {t('leadReview.submissionSummary', {
                         reviewer: submission.reviewerName,
@@ -185,7 +190,7 @@ export function LeadReviewPage() {
             <label className="block space-y-2 text-sm font-semibold text-slate-900">
               <span>{t('leadReview.note')}</span>
               <textarea
-                className="min-h-36 w-full rounded-lg border border-slate-300 px-3 py-2 font-normal text-slate-800"
+                className="min-h-36 w-full rounded-md border border-slate-300 px-3 py-2 font-normal text-slate-800 shadow-[inset_0_1px_1px_rgb(15_23_42_/_0.04)]"
                 value={note}
                 aria-describedby={!note.trim() ? 'lead-note-error' : undefined}
                 onChange={(event) => setNote(event.target.value)}

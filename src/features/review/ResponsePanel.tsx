@@ -24,7 +24,10 @@ export const ResponsePanel = memo(function ResponsePanel({
   );
 
   return (
-    <Card className="space-y-3" onMouseUp={() => onCaptureSelection(side)}>
+    <Card
+      className="space-y-3 border-t-4 border-t-slate-300"
+      onMouseUp={() => onCaptureSelection(side)}
+    >
       <h2 className="text-lg font-semibold text-slate-950">{title}</h2>
       <p className="whitespace-pre-wrap leading-7 text-slate-700">
         {segments.map((segment, index) =>

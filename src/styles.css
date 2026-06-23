@@ -24,6 +24,15 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  background:
+    linear-gradient(180deg, rgb(248 250 252 / 0.94), rgb(241 245 249 / 0.94)),
+    repeating-linear-gradient(
+      90deg,
+      rgb(15 23 42 / 0.035) 0,
+      rgb(15 23 42 / 0.035) 1px,
+      transparent 1px,
+      transparent 28px
+    );
 }
 
 a {
@@ -60,4 +69,37 @@ a {
 
 .skip-link:focus {
   top: 1rem;
+}
+
+@keyframes enter-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .animate-enter {
+    animation: enter-up 220ms ease-out both;
+  }
+
+  .interactive-surface {
+    transition:
+      border-color 160ms ease,
+      box-shadow 160ms ease,
+      transform 160ms ease;
+  }
+
+  .interactive-surface:hover {
+    border-color: rgb(148 163 184 / 0.78);
+    box-shadow:
+      0 12px 24px rgb(15 23 42 / 0.07),
+      0 2px 6px rgb(15 23 42 / 0.05);
+    transform: translateY(-1px);
+  }
 }
