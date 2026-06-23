@@ -1,0 +1,13 @@
+node_modules
+.DS_Store
+dist
+coverage
+playwright-report
+test-results
+storybook-static
+*.tsbuildinfo
+.env
+.env.local
+.vscode/*.local.json
+.codex/config.toml
+AGENTS.md
