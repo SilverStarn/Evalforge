@@ -106,12 +106,6 @@ See [`docs/performance.md`](docs/performance.md).
 
 See [`docs/testing-strategy.md`](docs/testing-strategy.md).
 
-## Working with Codex
-
-The root [`AGENTS.md`](AGENTS.md) file contains repository-level instructions for Codex. The file tells Codex how to run, test, structure, and review changes in this codebase.
-
-Reusable task prompts are in [`docs/codex-task-prompts.md`](docs/codex-task-prompts.md).
-
 ## Project status
 
 This repository is a working frontend workbench. The main flows, seed data, architecture docs, tests, CI, and performance notes are included. The next useful milestones are listed in [`docs/roadmap.md`](docs/roadmap.md).
